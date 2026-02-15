@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feliz Aniversário Mãe ❤️</title>
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
@@ -19,27 +20,29 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      padding: 10px;
     }
 
     .card {
       background: white;
-      padding: 30px;
+      padding: 25px;
       border-radius: 20px;
       text-align: center;
-      width: 90%;
-      max-width: 500px;
+      width: 100%;
+      max-width: 420px;
       box-shadow: 0 10px 30px rgba(0,0,0,.2);
-      animation: aparecer 1s ease;
+      animation: aparecer .8s ease;
       z-index: 10;
     }
 
     h1 {
       color: #ff4d6d;
       margin-bottom: 15px;
+      font-size: 22px;
     }
 
     p {
-      font-size: 18px;
+      font-size: 16px;
       color: #333;
       margin-bottom: 20px;
       min-height: 60px;
@@ -51,9 +54,9 @@
       border: none;
       padding: 12px 25px;
       border-radius: 50px;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: .3s;
     }
 
     button:hover {
@@ -61,47 +64,30 @@
       background: #ff1f4b;
     }
 
-    /* Fotos nos cantos */
-    .foto {
+    .hearts span, .hearts img {
       position: fixed;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid white;
-      box-shadow: 0 5px 15px rgba(0,0,0,.3);
-      z-index: 5;
-    }
-
-    .top-left { top: 15px; left: 15px; }
-    .top-right { top: 15px; right: 15px; }
-    .bottom-left { bottom: 15px; left: 15px; }
-    .bottom-right { bottom: 15px; right: 15px; }
-
-    .hearts span {
-      position: fixed;
-      bottom: -20px;
-      color: #ff4d6d;
-      font-size: 20px;
-      animation: subir 5s linear infinite;
-      opacity: 0.7;
+      bottom: -60px;
+      animation: subir linear;
+      opacity: .8;
+      z-index: 1;
     }
 
     @keyframes subir {
-      0% { transform: translateY(0); opacity: 0.8; }
-      100% { transform: translateY(-110vh); opacity: 0; }
+      0% { transform: translateY(0); opacity: .9; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
 
     @keyframes aparecer {
-      from { transform: scale(0.7); opacity: 0; }
+      from { transform: scale(.7); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h1>🎂 Feliz Aniversário Mãe! ❤️</h1>
+    <h1>🎂 Feliz Aniversário Mãe ❤️</h1>
     <p id="texto"></p>
     <button onclick="iniciar()">Clique para a surpresa 💖</button>
   </div>
@@ -109,70 +95,77 @@
   <div class="hearts"></div>
 
   <script>
-  const mensagem = "Mãe, Feliz Aniversário Que Deus Te Dê Muitos Anos De Vida, Você é a Melhor Mãe Que Eu Poderia Ter, Eu Te Amo Mais q Tudo, Feliz Aniversário!!♥️♥️";
+    const mensagem = "Mãe, Feliz Aniversário Que Deus Te Dê Muitos Anos De Vida, Você é a Melhor Mãe Que Eu Poderia Ter, Eu Te Amo Mais q Tudo, Feliz Aniversário!!♥️♥️";
 
-  let i = 0;
+    const fotos = [
+      "https://files.catbox.moe/v6uy3x.jpg",
+      "https://files.catbox.moe/kfdq4w.jpg",
+      "https://files.catbox.moe/e6cbni.jpg",
+      "https://files.catbox.moe/0woyxi.jpg"
+    ];
 
-  const fotos = [
-    "https://files.catbox.moe/v6uy3x.jpg",
-    "https://files.catbox.moe/kfdq4w.jpg",
-    "https://files.catbox.moe/e6cbni.jpg",
-    "https://files.catbox.moe/0woyxi.jpg"
-  ];
+    let i = 0;
 
-  function iniciar() {
-    document.getElementById("texto").innerHTML = "";
-    i = 0;
-    escrever();
-    setInterval(criarEfeito, 280);
-  }
-
-  function escrever() {
-    if (i < mensagem.length) {
-      document.getElementById("texto").innerHTML += mensagem.charAt(i);
-      i++;
-      setTimeout(escrever, 45);
+    function iniciar() {
+      document.getElementById("texto").innerHTML = "";
+      i = 0;
+      escrever();
+      setInterval(criarEfeito, 280);
     }
-  }
 
-  function criarEfeito() {
-    if (Math.random() < 0.6) {
-      criarCoracao();
-    } else {
-      criarFoto();
+    function escrever() {
+      if (i < mensagem.length) {
+        document.getElementById("texto").innerHTML += mensagem.charAt(i);
+        i++;
+        setTimeout(escrever, 45);
+      }
     }
-  }
 
-  function criarCoracao() {
-    const el = document.createElement("span");
-    el.innerHTML = "❤️";
-    animarElemento(el, false);
-  }
+    function criarEfeito() {
+      if (Math.random() < 0.55) {
+        criarCoracao();
+      } else {
+        criarFoto();
+      }
+    }
 
-  function criarFoto() {
-    const img = document.createElement("img");
-    img.src = fotos[Math.floor(Math.random() * fotos.length)];
-    img.style.width = "48px";
-    img.style.height = "48px";
-    img.style.borderRadius = "50%";
-    img.style.objectFit = "cover";
-    img.style.border = "2px solid white";
-    img.style.boxShadow = "0 4px 10px rgba(0,0,0,.3)";
-    animarElemento(img, true);
-  }
+    function criarCoracao() {
+      const coracao = document.createElement("span");
+      coracao.innerHTML = "❤️";
 
-  function animarElemento(el) {
-    el.style.position = "fixed";
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.bottom = "-60px";
-    el.style.animation = "subir " + (Math.random() * 3 + 3) + "s linear";
+      const tamanho = window.innerWidth < 500 ? 22 : 30;
 
-    document.body.appendChild(el);
+      coracao.style.fontSize = tamanho + "px";
+      animarElemento(coracao);
+    }
 
-    setTimeout(() => {
-      el.remove();
-    }, 7000);
-  }
-</script>
+    function criarFoto() {
+      const img = document.createElement("img");
+      img.src = fotos[Math.floor(Math.random() * fotos.length)];
+
+      const tamanho = window.innerWidth < 500 ? 32 : 48;
+
+      img.style.width = tamanho + "px";
+      img.style.height = tamanho + "px";
+      img.style.borderRadius = "50%";
+      img.style.objectFit = "cover";
+      img.style.border = "2px solid white";
+      img.style.boxShadow = "0 4px 10px rgba(0,0,0,.3)";
+
+      animarElemento(img);
+    }
+
+    function animarElemento(el) {
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+      document.querySelector(".hearts").appendChild(el);
+
+      setTimeout(() => {
+        el.remove();
+      }, 7000);
+    }
+  </script>
+
 </body>
 </html>
